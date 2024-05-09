@@ -143,15 +143,6 @@ body {
     }
 }
 
-@keyframes spinning {
-    from {
-        transform: rotate(0);
-    }
-    to {
-        transform: rotate(10370deg);
-    }
-}
-
 .arrow {
     position: absolute;
     height: 30px;
