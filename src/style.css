@@ -1,23 +1,35 @@
-body {
-    font-family: sans-serif;
+* {
     margin: 0;
-    background: #f6f7f9;
+    padding: 0;
 }
 
+:root {
+    --diameter: 400px;
+    --number-of-slices: 6;
+    --radius: calc(var(--diameter) / 2);
+    --circumference: 6.283185307 * var(--radius);
+    --slice-height: calc(var(--circumference) / var(--number-of-slices));
+    --slice-offset: calc(var(--slice-height) / 2);
+    --slice-color: #095b8d;
+    --slice-color-even: #063c5d;
+    --rotation: 360deg / var(--number-of-slices);
+}
+body {
+    font-family: sans-serif;
+    background: #f6f7f9;
+}
 .container {
     position: relative;
     max-width: 800px;
     margin: 2rem auto;
 }
-
 .spinner-table {
-    height: 398px;
-    width: 398px;
+    height: calc(var(--diameter) - 2px);
+    width: calc(var(--diameter) - 2px);
     position: relative;
     border-radius: 100%;
     overflow: hidden;
 }
-
 .dial {
     height: 100%;
     transition: all 5s ease-out;
@@ -49,8 +61,8 @@ body {
 .dial .slice {
     z-index: 150;
     position: absolute;
-    top: calc(50% - 104.71976px);
-    height: 209.43951px;
+    top: calc(50% - var(--slice-offset));
+    height: var(--slice-height);
     left: 50%;
     width: 50%;
     color: white;
@@ -88,27 +100,27 @@ body {
 .dial .slice:before {
     margin-bottom: -1px;
     margin-top: -2px;
-    border-width: 0 0 108.71976px 200px;
-    border-color: transparent transparent #095b8d transparent;
+    border-width: 0 0 calc(var(--slice-height) / 2 + 4px) var(--radius);
+    border-color: transparent transparent var(--slice-color) transparent;
 }
 .dial .slice:after {
     margin-top: -1px;
     margin-bottom: -2px;
-    border-width: 0 200px 122.71976px 0;
-    border-color: transparent #095b8d transparent transparent;
+    border-width: 0 var(--radius) calc(var(--slice-height) / 2 + 18px) 0;
+    border-color: transparent var(--slice-color) transparent transparent;
 }
 .dial .slice:nth-child(even):after {
-    border-color: transparent #063c5d transparent transparent;
+    border-color: transparent var(--slice-color-even) transparent transparent;
 }
 .dial .slice:nth-child(even):before {
-    border-color: transparent transparent #063c5d transparent;
+    border-color: transparent transparent var(--slice-color-even) transparent;
 }
 .dial .slice .label {
     position: absolute;
     top: 0;
     bottom: 0;
     width: 70%;
-    line-height: 209.43951px;
+    line-height: var(--slice-height);
     padding-top: 1px;
     padding-bottom: 1px;
     font-size: 16px;
@@ -133,7 +145,6 @@ body {
 .dial .slice:nth-child(6) {
     transform: rotate(300deg);
 }
-
 @keyframes rotating {
     from {
         transform: rotate(0);
@@ -142,19 +153,17 @@ body {
         transform: rotate(360deg);
     }
 }
-
 .arrow {
     position: absolute;
     height: 30px;
     width: 50px;
-    left: 430px;
+    left: calc(var(--diameter) + 30px);
     z-index: 500;
     display: block;
     top: 50%;
     margin-top: -15px;
     transform-origin: center right;
 }
-
 .pointer {
     z-index: 500;
     display: block;
@@ -185,14 +194,12 @@ body {
     border-width: 0 50px 15px 0;
     border-color: transparent #c27028 transparent transparent;
 }
-
 .board {
     position: relative;
     background: white;
     padding: 50px;
 }
-
-button {
+button#spin {
     background: #c27028;
     border: 0;
     padding: 15px 50px;
@@ -202,3 +209,69 @@ button {
     margin-top: -20px;
     right: 20%;
 }
+
+/* Form rules */
+.form-wrapper {
+    width: 350px;
+    margin: auto;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 25px;
+    border:solid rgb(153, 153, 153);
+    border-radius: 8px;
+    width: 330px;
+    box-sizing: border-box;
+}
+
+input {
+    font-size: 1.3rem;
+    width: 250px;
+    height: 25px;
+    box-sizing: border-box;
+}
+span{
+    display: flex;
+}
+span.input {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 255px auto;
+}
+.condition {
+    color: red;
+    font-size: 21px;
+}
+
+input:invalid {
+    background-color: rgb(255, 202, 202);
+    border-color: red;
+}
+
+input:valid {
+    background-color: rgb(202, 255, 206);
+    border-color: green;
+}
+
+.error {
+    width: 250px;
+    font-weight: 600;
+    font-size: 90%;
+    color: white;
+    background-color: #900;
+    border-radius: 0 0 5px 5px;
+    box-sizing: border-box;
+  }
+
+  form > div > button {
+    width: 140px;
+    position: relative;
+    background: #c27028;
+    border: 0;
+    padding: 15px 50px;
+    color: white;
+    left: 67px;
+  }
