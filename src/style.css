@@ -208,6 +208,7 @@ button#spin {
     top: 50%;
     margin-top: -20px;
     right: 20%;
+    cursor: pointer;
 }
 
 /* Form rules */
