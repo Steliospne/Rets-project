@@ -1,3 +1,4 @@
+import probability from "./probability";
 export default class Spinner {
   static #labels = [
     "Bonus Donut",
@@ -10,7 +11,6 @@ export default class Spinner {
   static #numberOfSlices = 6;
   // Generates the spinner.
   static generate(
-    probability = 1440,
     numberOfSlices = this.#numberOfSlices,
     labels = this.#labels
   ) {
@@ -48,15 +48,19 @@ export default class Spinner {
     }
     // Add the button functionality
     spinButton.addEventListener("click", () => {
-      dial.classList.toggle("spinning");
-      document
-        .querySelector(".content-container")
-        .classList.toggle("activated");
-      spinButton.style.pointerEvents = "none";
+      // Calls probability and spinAnimation function upon click.
+      let [rotation, spinAgain] = probability();
+      Spinner.addSpinAnimation(rotation);
+      dial.classList.add("spinning");
+      if (!spinAgain) {
+        spinButton.style.pointerEvents = "none";
+      } else {
+        setTimeout(() => {
+          dial.classList.remove("spinning");
+        }, 5200);
+      }
     });
     document.body.appendChild(spinner);
-    // Calls spinnAnimation function upon generation.
-    Spinner.addSpinAnimation(probability);
   }
   // Adds the animation of the spin upon generation.
   static addSpinAnimation(value) {
