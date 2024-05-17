@@ -1,5 +1,6 @@
 import "./style.css"
-import "./spinner.js"
+import Spinner from "./spinner.js"
 import Form from "./form.js"
 
-Form.create()
+Spinner.generate();
+Form.create();
