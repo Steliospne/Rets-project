@@ -46,7 +46,10 @@ export default class Form {
         const constraints = {
             fullName: [/\d/, "4"],
             email: ["^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", "8"],
-            phone: [/\d/, "10"],
+            phone: [
+                /^(\+?\d{1,3})?[\s-]?(\(?\d{1,4}\)?)?[\s-]?\d{1,4}[\s-]?\d{1,4}[\s-]?\d{1,9}$/,
+                "10",
+            ],
         };
 
         function checkNameField() {
@@ -121,10 +124,7 @@ export default class Form {
                 phone.setCustomValidity("Not a phone number.");
                 phone.nextElementSibling.innerHTML = "&#x2717;";
                 phone.nextElementSibling.style.color = "red";
-            } else if (
-                phone.value.length < +constraints.phone[1] &&
-                phone.value.length > 0
-            ) {
+            } else if (phone.value.length < +constraints.phone[1]) {
                 error.textContent = `Phone must be at least 10 characters. You are at ${phone.value.length}.`;
                 phone.setCustomValidity("Too short.");
                 phone.nextElementSibling.innerHTML = "&#x2717;";
