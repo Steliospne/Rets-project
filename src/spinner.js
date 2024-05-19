@@ -8,6 +8,7 @@ export default class Spinner {
     "X",
     "Spin Again",
   ];
+  static result;
   static #numberOfSlices = 6;
   // Generates the spinner.
   static generate(
@@ -35,6 +36,7 @@ export default class Spinner {
     </div>`;
     const spinButton = spinner.querySelector("#spin");
     const dial = spinner.querySelector(".dial");
+    dial.addEventListener("animationend", Spinner.showMessage);
     // Add the appropriate slices and their labels
     while (numberOfSlices !== 0) {
       let slice = document.createElement("div");
@@ -49,16 +51,10 @@ export default class Spinner {
     // Add the button functionality
     spinButton.addEventListener("click", () => {
       // Calls probability and spinAnimation function upon click.
-      let [rotation, spinAgain] = probability();
+      let [rotation, tempRes] = probability();
+      Spinner.result = tempRes;
       Spinner.addSpinAnimation(rotation);
       dial.classList.add("spinning");
-      if (!spinAgain) {
-        spinButton.style.pointerEvents = "none";
-      } else {
-        setTimeout(() => {
-          dial.classList.remove("spinning");
-        }, 5200);
-      }
     });
     document.body.appendChild(spinner);
   }
@@ -82,5 +78,16 @@ export default class Spinner {
     }
 
     dynamicStyles.sheet.insertRule(body, dynamicStyles.length);
+  }
+  static showMessage() {
+    const spinButton = document.querySelector("#spin");
+    const dial = document.querySelector(".dial");
+    if (Spinner.result === "Spin Again") {
+      alert(`${Spinner.result}`);
+      dial.classList.remove("spinning");
+    } else {
+      alert(`${Spinner.result}`);
+      spinButton.style.pointerEvents = "none";
+    }
   }
 }
