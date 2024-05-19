@@ -4,7 +4,10 @@
 }
 
 :root {
-  --diameter: 400px;
+  /* Spinner variables */
+  --container-size: 800px;
+  --diameter: calc(var(--container-size)/2);
+  
   --number-of-slices: 6;
   --radius: calc(var(--diameter) / 2);
   --circumference: 6.283185307 * var(--radius);
@@ -13,6 +16,10 @@
   --slice-color: #095b8d;
   --slice-color-even: #063c5d;
   --rotation: 360deg / var(--number-of-slices);
+
+  /* Form variables */
+  --form-wrapper-width: 350px;
+
 }
 body {
   font-family: sans-serif;
@@ -20,7 +27,7 @@ body {
 }
 .container {
   position: relative;
-  max-width: 800px;
+  max-width: var(--container-size);
   margin: 2rem auto;
 }
 .spinner-table {
@@ -209,12 +216,15 @@ button#spin {
   margin-top: -20px;
   right: 20%;
   cursor: pointer;
+  width: 125px;
 }
 
 /* Form rules */
 .form-wrapper {
-  width: 350px;
+  width: var(--form-wrapper-width);
   margin: auto;
+  position: relative;
+  top: calc(50dvh - var(--form-wrapper-width)/2);
 }
 
 form {
@@ -330,4 +340,26 @@ dialog::backdrop {
 dialog[open]::backdrop {
   background-color: rgb(0 0 0 / 45%);
   backdrop-filter: blur(4px);
+}
+
+@media only screen and (max-width: 450px) {
+  :root {
+    --container-size: 400px;
+    --diameter: var(--container-size);
+  }
+
+  .board {
+    position: relative;
+    background: white;
+    padding: 50px 0;
+}
+
+  .arrow {
+    left: calc(var(--diameter) + -40px);
+  }
+
+  button#spin {
+    top: unset;
+    right: calc(50% - (125px/2));
+  }
 }
