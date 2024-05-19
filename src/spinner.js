@@ -82,11 +82,23 @@ export default class Spinner {
   static showMessage() {
     const spinButton = document.querySelector("#spin");
     const dial = document.querySelector(".dial");
+    const dialogMessage = document.querySelector("dialog p");
+
     if (Spinner.result === "Spin Again") {
-      alert(`${Spinner.result}`);
+      dialogMessage.textContent = `You get to spin again!`;
+      document.querySelector("dialog").showModal();
+      document.querySelector("dialog").value = Spinner.result;
       dial.classList.remove("spinning");
     } else {
-      alert(`${Spinner.result}`);
+      if (
+        Spinner.result === "Bonus Donut" ||
+        Spinner.result === "2xBonus Donut"
+      ) {
+        dialogMessage.textContent = `Congrats! You got ${Spinner.result}!`;
+      } else {
+        dialogMessage.textContent = `Unfortunate, better luck next time!`;
+      }
+      document.querySelector("dialog").showModal();
       spinButton.style.pointerEvents = "none";
     }
   }
