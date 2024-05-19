@@ -344,7 +344,7 @@ dialog[open]::backdrop {
 
 @media only screen and (max-width: 450px) {
   :root {
-    --container-size: 400px;
+    --container-size: 350px;
     --diameter: var(--container-size);
   }
 
