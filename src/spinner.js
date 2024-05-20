@@ -4,7 +4,7 @@ export default class Spinner {
     "Bonus Donut",
     "X",
     "Spin Again",
-    "2x Bonus Donut",
+    "2xBonus Donut",
     "X",
     "Spin Again",
   ];

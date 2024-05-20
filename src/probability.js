@@ -14,7 +14,7 @@ export default function probability(externalVariables = 1) {
   let whichSlice = Math.round(Math.random()) === 0 ? 0 : -180;
   if (spin < bonusTwoDonutsProbability) {
     spin = 240 + margin;
-    result = "2x Bonus Donut";
+    result = "2xBonus Donut";
   } else if (spin < bonusDonutProbability) {
     spin = 60 + margin;
     result = "Bonus Donut";
