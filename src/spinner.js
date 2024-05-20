@@ -90,6 +90,7 @@ export default class Spinner {
       document.querySelector("dialog").value = Spinner.result;
       dial.classList.remove("spinning");
     } else {
+      document.querySelector("dialog").value = '';
       if (
         Spinner.result === "Bonus Donut" ||
         Spinner.result === "2xBonus Donut"
