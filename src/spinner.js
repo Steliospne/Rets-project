@@ -4,7 +4,7 @@ export default class Spinner {
     "Bonus Donut",
     "X",
     "Spin Again",
-    "2x Bonus Donut",
+    "2xBonus Donut",
     "X",
     "Spin Again",
   ];
@@ -50,6 +50,7 @@ export default class Spinner {
     }
     // Add the button functionality
     spinButton.addEventListener("click", () => {
+      spinButton.style.pointerEvents = "none";
       // Calls probability and spinAnimation function upon click.
       let [rotation, tempRes] = probability();
       Spinner.result = tempRes;
@@ -89,8 +90,10 @@ export default class Spinner {
       document.querySelector("dialog").showModal();
       document.querySelector("dialog").value = Spinner.result;
       dial.classList.remove("spinning");
+      spinButton.style.pointerEvents = "";
     } else {
-      document.querySelector("dialog").value = '';
+      // sets value to end to know that the spins are over
+      document.querySelector("dialog").value = "end";
       if (
         Spinner.result === "Bonus Donut" ||
         Spinner.result === "2xBonus Donut"

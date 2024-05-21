@@ -1,8 +1,12 @@
 import "./style.css";
 import Spinner from "./spinner.js";
-import Form from "./form.js";
 Spinner.generate();
-
+window.onbeforeunload = confirmExit;
+function confirmExit() {
+  if (dialog.value !== "end") {
+    return "You have attempted to leave this page. Are you sure?";
+  }
+}
 const dialog = document.querySelector("dialog");
 const dialogCancelButton = document.querySelector("#cancel");
 const dialogContinueButton = document.querySelector("#confirmBtn");
@@ -13,11 +17,7 @@ dialogCancelButton.addEventListener("click", () => {
 dialogContinueButton.addEventListener("click", doStuff);
 
 function doStuff() {
-  // If it isnt spin again, you could then generate the form.
   dialog.close();
   if (dialog.value === "Spin Again") return;
-  else {
-    document.body.innerHTML = "";
-    Form.create();
-  }
+  dialogContinueButton.parentElement.href = "https://localhost:8080/form";
 }
