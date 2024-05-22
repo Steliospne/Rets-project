@@ -19,5 +19,5 @@ dialogContinueButton.addEventListener("click", doStuff);
 function doStuff() {
   dialog.close();
   if (dialog.value === "Spin Again") return;
-  dialogContinueButton.parentElement.href = "https://localhost:8080/form.html";
+  dialogContinueButton.parentElement.href = "http://localhost:8080/form.html";
 }
