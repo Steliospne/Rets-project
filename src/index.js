@@ -1,5 +1,7 @@
 import "./style.css";
+import disclaimerWarning from "./disclaimer";
 import Spinner from "./spinner.js";
+disclaimerWarning();
 Spinner.generate();
 const code = window.location.href.slice(window.location.href.indexOf("?"));
 window.onbeforeunload = confirmExit;
