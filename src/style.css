@@ -6,9 +6,9 @@
 :root {
   /* Spinner variables */
   --container-size: 800px;
-  --diameter: calc(var(--container-size)/2);
-  
-  --number-of-slices: 6;
+  --diameter: calc(var(--container-size) / 2);
+
+  --number-of-slices: 10;
   --radius: calc(var(--diameter) / 2);
   --circumference: 6.283185307 * var(--radius);
   --slice-height: calc(var(--circumference) / var(--number-of-slices));
@@ -19,7 +19,6 @@
 
   /* Form variables */
   --form-wrapper-width: 350px;
-
 }
 body {
   font-family: sans-serif;
@@ -138,20 +137,33 @@ body {
   transform: rotate(0deg);
 }
 .dial .slice:nth-child(2) {
-  transform: rotate(60deg);
+  transform: rotate(36deg);
 }
 .dial .slice:nth-child(3) {
-  transform: rotate(120deg);
+  transform: rotate(72deg);
 }
 .dial .slice:nth-child(4) {
-  transform: rotate(180deg);
+  transform: rotate(108deg);
 }
 .dial .slice:nth-child(5) {
-  transform: rotate(240deg);
+  transform: rotate(144deg);
 }
 .dial .slice:nth-child(6) {
-  transform: rotate(300deg);
+  transform: rotate(180deg);
 }
+.dial .slice:nth-child(7) {
+  transform: rotate(216deg);
+}
+.dial .slice:nth-child(8) {
+  transform: rotate(252deg);
+}
+.dial .slice:nth-child(9) {
+  transform: rotate(288deg);
+}
+.dial .slice:nth-child(10) {
+  transform: rotate(324deg);
+}
+
 @keyframes rotating {
   from {
     transform: rotate(0);
@@ -224,7 +236,7 @@ button#spin {
   width: var(--form-wrapper-width);
   margin: auto;
   position: relative;
-  top: calc(50dvh - var(--form-wrapper-width)/2);
+  top: calc(50dvh - var(--form-wrapper-width) / 2);
 }
 
 form {
@@ -352,7 +364,7 @@ dialog[open]::backdrop {
     position: relative;
     background: white;
     padding: 50px 0;
-}
+  }
 
   .arrow {
     left: calc(var(--diameter) + -40px);
@@ -360,6 +372,6 @@ dialog[open]::backdrop {
 
   button#spin {
     top: unset;
-    right: calc(50% - (125px/2));
+    right: calc(50% - (125px / 2));
   }
 }

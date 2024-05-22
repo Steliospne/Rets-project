@@ -1,15 +1,19 @@
 import probability from "./probability";
 export default class Spinner {
   static #labels = [
-    "Bonus Donut",
-    "X",
+    "2 Donuts",
+    "Donut",
+    "A Hug",
+    "Nothing",
     "Spin Again",
-    "2xBonus Donut",
-    "X",
+    "Nothing",
+    "Donut",
+    "A Hug",
+    "Nothing",
     "Spin Again",
   ];
   static result;
-  static #numberOfSlices = 6;
+  static #numberOfSlices = 10;
   // Generates the spinner.
   static generate(
     numberOfSlices = this.#numberOfSlices,
@@ -94,13 +98,10 @@ export default class Spinner {
     } else {
       // sets value to end to know that the spins are over
       document.querySelector("dialog").value = "end";
-      if (
-        Spinner.result === "Bonus Donut" ||
-        Spinner.result === "2xBonus Donut"
-      ) {
-        dialogMessage.textContent = `Congrats! You got ${Spinner.result}!`;
-      } else {
+      if (Spinner.result === "Nothing") {
         dialogMessage.textContent = `Unfortunate, better luck next time!`;
+      } else {
+        dialogMessage.textContent = `Congrats! You got ${Spinner.result}!`;
       }
       document.querySelector("dialog").showModal();
       spinButton.style.pointerEvents = "none";
