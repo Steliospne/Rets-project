@@ -1,6 +1,7 @@
 import "./style.css";
 import Spinner from "./spinner.js";
 Spinner.generate();
+const code = window.location.href.slice(window.location.href.indexOf("?"));
 window.onbeforeunload = confirmExit;
 function confirmExit() {
   if (dialog.value !== "end") {
@@ -19,5 +20,5 @@ dialogContinueButton.addEventListener("click", doStuff);
 function doStuff() {
   dialog.close();
   if (dialog.value === "Spin Again") return;
-  dialogContinueButton.parentElement.href = "http://localhost:8080/form.html";
+  dialogContinueButton.parentElement.href = `http://localhost:8080/form${code}`;
 }
