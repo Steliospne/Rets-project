@@ -21,6 +21,7 @@
   --form-wrapper-width: 350px;
 }
 body {
+  overscroll-behavior-y: contain;
   font-family: sans-serif;
 }
 .container {
