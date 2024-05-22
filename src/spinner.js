@@ -1,15 +1,19 @@
 import probability from "./probability";
 export default class Spinner {
   static #labels = [
-    "Bonus Donut",
-    "X",
+    "2 Donuts",
+    "Donut",
+    "A Hug",
+    "Nothing",
     "Spin Again",
-    "2xBonus Donut",
-    "X",
+    "Nothing",
+    "Donut",
+    "A Hug",
+    "Nothing",
     "Spin Again",
   ];
   static result;
-  static #numberOfSlices = 6;
+  static #numberOfSlices = 10;
   // Generates the spinner.
   static generate(
     numberOfSlices = this.#numberOfSlices,
@@ -50,6 +54,7 @@ export default class Spinner {
     }
     // Add the button functionality
     spinButton.addEventListener("click", () => {
+      spinButton.style.pointerEvents = "none";
       // Calls probability and spinAnimation function upon click.
       let [rotation, tempRes] = probability();
       Spinner.result = tempRes;
@@ -89,15 +94,14 @@ export default class Spinner {
       document.querySelector("dialog").showModal();
       document.querySelector("dialog").value = Spinner.result;
       dial.classList.remove("spinning");
+      spinButton.style.pointerEvents = "";
     } else {
-      document.querySelector("dialog").value = '';
-      if (
-        Spinner.result === "Bonus Donut" ||
-        Spinner.result === "2xBonus Donut"
-      ) {
-        dialogMessage.textContent = `Congrats! You got ${Spinner.result}!`;
-      } else {
+      // sets value to end to know that the spins are over
+      document.querySelector("dialog").value = "end";
+      if (Spinner.result === "Nothing") {
         dialogMessage.textContent = `Unfortunate, better luck next time!`;
+      } else {
+        dialogMessage.textContent = `Congrats! You got ${Spinner.result}!`;
       }
       document.querySelector("dialog").showModal();
       spinButton.style.pointerEvents = "none";
