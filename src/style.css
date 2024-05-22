@@ -21,8 +21,8 @@
   --form-wrapper-width: 350px;
 }
 body {
+  overscroll-behavior-y: contain;
   font-family: sans-serif;
-  background: #f6f7f9;
 }
 .container {
   position: relative;
@@ -215,7 +215,6 @@ body {
 }
 .board {
   position: relative;
-  background: white;
   padding: 50px;
 }
 button#spin {
@@ -356,7 +355,7 @@ dialog[open]::backdrop {
 
 @media only screen and (max-width: 450px) {
   :root {
-    --container-size: 350px;
+    --container-size: 300px;
     --diameter: var(--container-size);
   }
 
@@ -367,11 +366,59 @@ dialog[open]::backdrop {
   }
 
   .arrow {
-    left: calc(var(--diameter) + -40px);
+    left: calc(var(--diameter) + -20px);
   }
 
   button#spin {
+    box-shadow: 0 0 8px 5px rgba(74, 74, 74, 0.4);
     top: unset;
     right: calc(50% - (125px / 2));
   }
+
+  .disclaimer {
+    margin: 1rem auto;
+    padding: 10px;
+    box-shadow: 0 0 8px 8px rgba(74, 74, 74, 0.8);
+    background: #095b8d;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .disclaimer h3 {
+    font-size: 1.5rem;
+    color: rgb(255, 166, 0);
+    font-weight: 1000;
+  }
+
+  .disclaimer p {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+}
+
+.disclaimer {
+  margin: 1rem auto;
+  max-width: var(--container-size);
+  padding: 10px;
+  box-shadow: 0 0 8px 8px rgba(74, 74, 74, 0.8);
+  background: #095b8d;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.disclaimer h3 {
+  font-size: 1.5rem;
+  color: rgb(255, 166, 0);
+  font-weight: 1000;
+}
+
+.disclaimer p {
+  text-align: center;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 500;
 }
