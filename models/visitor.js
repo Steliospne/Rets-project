@@ -16,7 +16,7 @@ const visitorSchema = new Schema(
       required: true,
     },
     code: {
-      type: Number,
+      type: String,
     },
     visited: {
       type: Boolean,
