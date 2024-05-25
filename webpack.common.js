@@ -5,9 +5,10 @@ module.exports = {
   entry: {
     index: "./src/index.js",
     form: "./src/form.js",
+    // submit: "./src/submit.js"
   },
   output: {
-    filename: "[name].bundle.js",
+    filename: "[name].js",
     path: path.resolve(__dirname, "dist"),
     assetModuleFilename: "assets/",
     clean: true,
@@ -20,11 +21,16 @@ module.exports = {
       chunks: ["index"],
     }),
     new HtmlWebpackPlugin({
-      // Also generate a form.html
       template: "./src/form.html",
       filename: "form.html",
       inject: "body",
       chunks: ["form"],
+    }),
+    new HtmlWebpackPlugin({
+      template: "./src/submit.html",
+      filename: "submit.html",
+      inject: "body",
+      chunks: ["submit"],
     }),
   ],
   module: {
