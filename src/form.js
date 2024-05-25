@@ -4,11 +4,11 @@ class Form {
     const wrapper = document.createElement("div");
     wrapper.classList.add("form-wrapper");
     wrapper.innerHTML = `
-            <form>
+            <form action="/submit" method="POST">
             <div>
                 <label for="name">Name: </label>
                 <span class="input">
-                    <input type="text" id="name" name="fullName" placeholder="Name"/>
+                    <input type="text" id="name" name="name" placeholder="Name"/>
                     <p class="condition"></p>
                 </span>
                 <span class="error" aria-live="polite"></span>
