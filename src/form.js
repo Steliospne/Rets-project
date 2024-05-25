@@ -1,10 +1,12 @@
 import "./style.css";
+import backDisabler from "./backDisabler.js";
+
 class Form {
   static create() {
     const wrapper = document.createElement("div");
     wrapper.classList.add("form-wrapper");
     wrapper.innerHTML = `
-            <form action="/submit" method="POST">
+            <form action="/submit${window.location.href.slice(window.location.href.indexOf("?"))}" method="POST">
             <div>
                 <label for="name">Name: </label>
                 <span class="input">
@@ -145,3 +147,4 @@ class Form {
   }
 }
 Form.create();
+backDisabler();
