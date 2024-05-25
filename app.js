@@ -25,7 +25,10 @@ mongoose
 // app.set('views', 'src');       ...
 // ..................................
 
-// Routes
+// Middleware
+app.use(express.urlencoded({ extended: true }));
+
+// Routing
 app.get("/", (req, res) => {
   // testing if the visitor has the correct pwd *Under Construction*
   const visitorURL = new URL(req.url, baseURLdev);
@@ -34,7 +37,7 @@ app.get("/", (req, res) => {
   Visitor.findOne({ code: visitorCode })
     .then((result) => {
       if (result.visited === false) {
-        result.visited = true;
+        // result.visited = true;
         result.save().catch((err) => {
           console.log(err);
         });
@@ -49,14 +52,39 @@ app.get("/", (req, res) => {
 app.get("/form", (req, res) => {
   const visitorURL = new URL(req.url, baseURLdev);
   const visitorCode = visitorURL.search.slice(1);
+
   Visitor.findOne({ code: visitorCode })
     .then((result) => {
+      console.log(result);
       if (!result) {
         res.send("Access Denied");
       }
       res.sendFile("./dist/form.html", { root: __dirname });
     })
     .catch((err) => console.log(err));
+});
+
+app.get("/submit-ok", (req, res) => {
+  res.sendFile("./dist/submit.html", { root: __dirname });
+});
+
+app.post("/submit", (req, res) => {
+  console.log(req.url, req.body);
+  const visitorURL = new URL(req.url, baseURLdev);
+  const visitorCode = visitorURL.search.slice(1);
+  Visitor.findOne({ code: visitorCode }).then((result) => {
+    result.name = req.body.name;
+    result.email = req.body.email;
+    result.phone = req.body.phone;
+    result
+      .save()
+      .then((result) => {
+        res.redirect("/submit-ok");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
 });
 
 //Testing route that creates a dummy visitor
@@ -78,5 +106,4 @@ app.get("/debug-db", (req, res) => {
     });
 });
 
-// Serving of static files
 app.use(express.static("dist"));
