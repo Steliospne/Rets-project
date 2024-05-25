@@ -27,7 +27,9 @@ body {
 .container {
   position: relative;
   max-width: var(--container-size);
+  max-height: max-content;
   margin: 2rem auto;
+  
 }
 .spinner-table {
   height: calc(var(--diameter) - 2px);
@@ -353,7 +355,45 @@ dialog[open]::backdrop {
   backdrop-filter: blur(4px);
 }
 
-@media only screen and (max-width: 450px) {
+.disclaimer {
+  margin: 1rem auto;
+  max-width: var(--container-size);
+  padding: 10px;
+  box-shadow: 0 0 8px 8px rgba(74, 74, 74, 0.8);
+  background: #095b8d;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.disclaimer h3 {
+  font-size: 1.5rem;
+  color: rgb(255, 166, 0);
+  font-weight: 1000;
+}
+
+.disclaimer p {
+  text-align: center;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+/* Submit view */
+.submitSuccess {
+  font-size: 1.5rem;
+  background-color: #323443;
+  color: SteelBlue;
+  padding: 30px;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  position: absolute;
+}
+
+@media only screen and (max-width: 850px ) and (orientation: portrait) {
   :root {
     --container-size: 300px;
     --diameter: var(--container-size);
@@ -399,26 +439,47 @@ dialog[open]::backdrop {
   }
 }
 
-.disclaimer {
-  margin: 1rem auto;
-  max-width: var(--container-size);
-  padding: 10px;
-  box-shadow: 0 0 8px 8px rgba(74, 74, 74, 0.8);
-  background: #095b8d;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.disclaimer h3 {
-  font-size: 1.5rem;
-  color: rgb(255, 166, 0);
-  font-weight: 1000;
-}
+/* @media only screen and (orientation: landscape) {
+  :root {
+    --container-size: 280px;
+    --diameter: var(--container-size);
+    height: 100dvh;
+  }
 
-.disclaimer p {
-  text-align: center;
-  color: white;
-  font-size: 1.2rem;
-  font-weight: 500;
-}
+  .board {
+    position: relative;
+    background: white;
+    padding: 10px 0;
+  }
+
+  .arrow {
+    left: calc(var(--diameter) + -20px);
+  }
+
+  button#spin {
+    box-shadow: 0 0 8px 5px rgba(74, 74, 74, 0.4);
+    top: calc(50dvh - 45/2);
+    right: -60%;
+  }
+
+  .container {
+    margin-top: 5px;
+    z-index: -1;
+  }
+
+  .disclaimer {
+    max-width: unset;
+    width: 500px;
+    margin: auto;
+  }
+
+  .disclaimer h3 {
+    font-size: 1.1rem;
+  }
+
+  .disclaimer p {
+    font-size: 1rem;
+    width: 500px;
+
+  }
+} */
