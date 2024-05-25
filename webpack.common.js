@@ -5,7 +5,7 @@ module.exports = {
   entry: {
     index: "./src/index.js",
     form: "./src/form.js",
-    // submit: "./src/submit.js"
+    submit: "./src/submit.js"
   },
   output: {
     filename: "[name].js",
