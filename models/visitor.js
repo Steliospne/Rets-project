@@ -17,11 +17,9 @@ const visitorSchema = new Schema(
     },
     code: {
       type: Number,
-      required: true,
     },
     visited: {
       type: Boolean,
-      required: true,
       default: false,
     },
   },
