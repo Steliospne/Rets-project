@@ -29,7 +29,6 @@ body {
   max-width: var(--container-size);
   max-height: max-content;
   margin: 2rem auto;
-  
 }
 .spinner-table {
   height: calc(var(--diameter) - 2px);
@@ -392,8 +391,48 @@ dialog[open]::backdrop {
   margin: auto;
   position: absolute;
 }
+body {
+  height: 100dvh;
+}
+.styling404 {
+  font-family: myFont;
+  background-image: url(./assets/IMG_0006.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100dvh;
+}
 
-@media only screen and (max-width: 850px ) and (orientation: portrait) {
+@font-face {
+  font-family: "MyFont";
+  src: url("./assets/KEEPT___.TTF") format("truetype");
+  font-style: normal;
+}
+.styling404 h1 {
+  color: rgb(0, 139, 139);
+  margin: 20px;
+  font-size: 3rem;
+}
+.styling404 h2 {
+  color: rgb(0, 110, 110);
+  font-size: 9rem;
+}
+.styling404 h3 {
+  color: rgb(0, 72, 72);
+  font-size: 2.5rem;
+  margin: 20px;
+}
+
+.styling404 h1,
+.styling404 h2,
+.styling404 h3 {
+  text-align: center;
+}
+@media only screen and (max-width: 850px) and (orientation: portrait) {
   :root {
     --container-size: 300px;
     --diameter: var(--container-size);
@@ -401,7 +440,6 @@ dialog[open]::backdrop {
 
   .board {
     position: relative;
-    background: white;
     padding: 50px 0;
   }
 
@@ -439,7 +477,7 @@ dialog[open]::backdrop {
   }
 }
 
-/* @media only screen and (orientation: landscape) {
+@media only screen and (max-height: 500px) and (orientation: landscape) {
   :root {
     --container-size: 280px;
     --diameter: var(--container-size);
@@ -448,7 +486,6 @@ dialog[open]::backdrop {
 
   .board {
     position: relative;
-    background: white;
     padding: 10px 0;
   }
 
@@ -458,7 +495,7 @@ dialog[open]::backdrop {
 
   button#spin {
     box-shadow: 0 0 8px 5px rgba(74, 74, 74, 0.4);
-    top: calc(50dvh - 45/2);
+    top: calc(50dvh - 45 / 2);
     right: -60%;
   }
 
@@ -480,6 +517,5 @@ dialog[open]::backdrop {
   .disclaimer p {
     font-size: 1rem;
     width: 500px;
-
   }
-} */
+}

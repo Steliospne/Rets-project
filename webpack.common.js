@@ -5,7 +5,8 @@ module.exports = {
   entry: {
     index: "./src/index.js",
     form: "./src/form.js",
-    submit: "./src/submit.js"
+    submit: "./src/submit.js",
+    404: "./src/404.js",
   },
   output: {
     filename: "[name].js",
@@ -31,6 +32,12 @@ module.exports = {
       filename: "submit.html",
       inject: "body",
       chunks: ["submit"],
+    }),
+    new HtmlWebpackPlugin({
+      template: "./src/404.html",
+      filename: "404.html",
+      inject: "body",
+      chunks: ["404"],
     }),
   ],
   module: {
