@@ -106,4 +106,8 @@ app.get("/debug-db", (req, res) => {
     });
 });
 
+app.use((req, res) => {
+  res.sendFile("./dist/404.html", { root: __dirname });
+});
+
 app.use(express.static("dist"));
