@@ -3,6 +3,6 @@ export default function disclaimerWarning() {
   disclaimerWarningElement.classList.add("disclaimer");
   disclaimerWarningElement.innerHTML = `
     <h3>WARNING!</h3>
-    <p>If you leave or reload this page, you will loose your free spin! </p>`;
+    <p>If you leave or reload this page, you will lose your free spin! </p>`;
   document.body.append(disclaimerWarningElement);
 }

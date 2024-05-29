@@ -20,6 +20,18 @@
   /* Form variables */
   --form-wrapper-width: 350px;
 }
+
+a {
+  display: none;
+  visibility: hidden;
+}
+
+#cancel {
+  position: fixed;
+  right: 0;
+  top: -10px;
+  background-color: transparent;
+}
 body {
   overscroll-behavior-y: contain;
   font-family: sans-serif;
@@ -308,6 +320,10 @@ dialog[open] {
 }
 
 dialog {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  text-align: center;
   animation: fadeIn 1s;
   font-size: 1.5rem;
   background-color: #323443;
