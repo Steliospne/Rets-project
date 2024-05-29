@@ -2,9 +2,9 @@ import probability from "./probability";
 export default class Spinner {
   static #labels = [
     "2 Donuts",
-    "Donut",
     "A Hug",
     "Nothing",
+    "Donut",
     "Spin Again",
     "Nothing",
     "Donut",

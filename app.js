@@ -1,10 +1,12 @@
+const fs = require("fs");
 const express = require("express");
 const mongoose = require("mongoose");
 const Visitor = require("./models/visitor.js");
+const { error } = require("console");
 
 const app = express();
 
-const baseURL = "http:donuts.rets.gr/";
+const baseURL = "http://donuts.rets.gr/";
 const baseURLdev = "http://localhost:8080/";
 
 //db key
@@ -18,7 +20,12 @@ mongoose
     console.log("Connected to db");
     app.listen(8080);
   })
-  .catch((err) => console.log(err));
+  .catch((err) => {
+    for (let key in err) {
+      console.log(key);
+    }
+    logger(err);
+  });
 
 // Future use and testing............
 // app.set("view engine", "ejs"); ...
@@ -36,6 +43,7 @@ app.get("/", (req, res) => {
   console.log("Got the request ->", visitorCode);
   Visitor.findOne({ code: visitorCode })
     .then((result) => {
+      if (!result) return res.redirect("/404");
       if (result.visited === false) {
         // result.visited = true;
         result.save().catch((err) => {
@@ -106,13 +114,22 @@ app.get("/debug-db", (req, res) => {
     });
 });
 
-app.get("/404.html", (req, res) => {
+app.get("/404", (req, res) => {
   console.log("Request ->", req.url);
-  res.sendFile("./dist/404.html", { root: __dirname });
+  res.status(404).sendFile("./dist/404.html", { root: __dirname });
 });
+
 app.use(express.static("dist"));
 
 app.use((req, res) => {
   console.log("Request ->", req.url);
-  res.redirect("/404.html");
+  res.redirect("/404");
 });
+
+const logger = function (err) {
+  let timestamp = Date.now();
+  let filename = "./log_" + timestamp + ".txt";
+  fs.writeFile(filename, err.message, () => {
+    void 0;
+  });
+};

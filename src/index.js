@@ -8,6 +8,9 @@ const dialogCancelButton = document.querySelector("#cancel");
 const dialogContinueButton = document.querySelector("#confirmBtn");
 const code = window.location.href.slice(window.location.href.indexOf("?"));
 
+const baseURL = "http://donuts.rets.gr/";
+const baseURLdev = "http://localhost:8080/";
+
 function confirmExit() {
   if (dialog.value !== "end") {
     return "You have attempted to leave this page. Are you sure?";
@@ -17,7 +20,7 @@ function confirmExit() {
 function doStuff() {
   dialog.close();
   if (dialog.value === "Spin Again") return;
-  dialogContinueButton.parentElement.href = `http://localhost:8080/form${code}`;
+  dialogContinueButton.parentElement.href = baseURL + "form" + code;
 }
 
 dialogCancelButton.addEventListener("click", () => {
