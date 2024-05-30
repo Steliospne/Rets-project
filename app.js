@@ -17,14 +17,13 @@ const dbURI =
 mongoose
   .connect(dbURI)
   .then((result) => {
-    console.log("Connected to db");
+    const message = "Connected to db@" + result.connections[0].host + "\n"
+    logger(message);
+    console.log("Connected to db\n");
     app.listen(8080);
   })
   .catch((err) => {
-    for (let key in err) {
-      console.log(key);
-    }
-    logger(err);
+    error_logger(err);
   });
 
 // Future use and testing............
@@ -63,7 +62,6 @@ app.get("/form", (req, res) => {
 
   Visitor.findOne({ code: visitorCode })
     .then((result) => {
-      console.log(result);
       if (!result) {
         res.send("Access Denied");
       }
@@ -95,25 +93,6 @@ app.post("/submit", (req, res) => {
   });
 });
 
-//Testing route that creates a dummy visitor
-app.get("/debug-db", (req, res) => {
-  const visitor = new Visitor({
-    name: "John Doe",
-    email: "example@domain.com",
-    phone: 6955884499,
-    code: 67545,
-  });
-
-  visitor
-    .save()
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
-
 app.get("/404", (req, res) => {
   console.log("Request ->", req.url);
   res.status(404).sendFile("./dist/404.html", { root: __dirname });
@@ -126,10 +105,26 @@ app.use((req, res) => {
   res.redirect("/404");
 });
 
-const logger = function (err) {
-  let timestamp = Date.now();
-  let filename = "./log_" + timestamp + ".txt";
-  fs.writeFile(filename, err.message, () => {
-    void 0;
+const error_logger = function (err) {
+  let timestamp = new Date().toISOString()
+  const filename = "logs/error_logs.txt";
+  const err_data = `
+${timestamp}
+${err.stack}\n
+  `;
+  fs.appendFile(filename, err_data, (err) => {
+    if (err) throw err;
+  });
+};
+
+const logger = function (msg) {
+  let timestamp = new Date().toISOString();
+  const filename = "./logs/info_logs.txt";
+  const data = `
+${timestamp}
+${msg}\n
+  `
+  fs.appendFile(filename, data, (err) => {
+    if (err) throw err;
   });
 };
