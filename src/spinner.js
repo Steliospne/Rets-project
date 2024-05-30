@@ -7,9 +7,9 @@ export default class Spinner {
     "Donut",
     "Spin Again",
     "Nothing",
-    "Donut",
     "A Hug",
     "Nothing",
+    "Donut",
     "Spin Again",
   ];
   static result;
@@ -20,8 +20,10 @@ export default class Spinner {
     labels = this.#labels
   ) {
     // generate elements and innerHTML
+    const wrapper = document.createElement("div");
     const spinner = document.createElement("div");
-    spinner.classList.add("container");
+    wrapper.classList.add("wrapper");
+    spinner.classList.add("spinner-container");
     spinner.innerHTML = `
     <div class="board">
           <div class="spinner-table">
@@ -61,7 +63,8 @@ export default class Spinner {
       Spinner.addSpinAnimation(rotation);
       dial.classList.add("spinning");
     });
-    document.body.appendChild(spinner);
+    document.body.append(wrapper);
+    document.querySelector(".wrapper").append(spinner);
   }
   // Adds the animation of the spin upon generation.
   static addSpinAnimation(value) {

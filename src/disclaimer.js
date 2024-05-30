@@ -4,5 +4,5 @@ export default function disclaimerWarning() {
   disclaimerWarningElement.innerHTML = `
     <h3>WARNING!</h3>
     <p>If you leave or reload this page, you will lose your free spin! </p>`;
-  document.body.append(disclaimerWarningElement);
+  document.querySelector(".wrapper").prepend(disclaimerWarningElement);
 }
