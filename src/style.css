@@ -1,19 +1,20 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: "MyFont";
 }
 
 :root {
   /* Spinner variables */
-  --container-size: 800px;
-  --diameter: calc(var(--container-size) / 2);
+  --spinner-container-size: 800px;
+  --diameter: calc(var(--spinner-container-size) / 2);
 
   --number-of-slices: 10;
   --radius: calc(var(--diameter) / 2);
   --circumference: 6.283185307 * var(--radius);
   --slice-height: calc(var(--circumference) / var(--number-of-slices));
   --slice-offset: calc(var(--slice-height) / 2);
-  --slice-color: #ed0c93 ;
+  --slice-color: #ed0c93;
   --slice-color-even: #ff7aca;
   --rotation: 360deg / var(--number-of-slices);
 
@@ -35,12 +36,20 @@ a {
 body {
   overscroll-behavior-y: contain;
   font-family: sans-serif;
+  height: 100dvh;
+}
+
+.wrapper {
   background-image: url("./assets/Cute_Donuts.jpg");
   background-size: cover;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
-.container {
+
+.spinner-container {
   position: relative;
-  max-width: var(--container-size);
+  max-width: var(--spinner-container-size);
   max-height: max-content;
   margin: 2rem auto;
 }
@@ -241,17 +250,17 @@ button#spin {
   position: absolute;
   top: 50%;
   margin-top: -20px;
-  right: 20%;
+  right: -30%;
   cursor: pointer;
   width: 125px;
 }
 
 /* Form rules */
 .form-wrapper {
-  width: var(--form-wrapper-width);
-  margin: auto;
-  position: relative;
-  top: calc(50dvh - var(--form-wrapper-width) / 2);
+  height: 100%;
+  background-image: url("./assets/Cool_Donut.jpg");
+  background-size: cover;
+  background-position-x: center;
 }
 
 form {
@@ -261,15 +270,22 @@ form {
   padding: 25px;
   border: solid rgb(153, 153, 153);
   border-radius: 8px;
-  width: 330px;
   box-sizing: border-box;
+  align-items: center;
+  position: relative;
+  top: calc(50dvh - var(--form-wrapper-width) / 2);
+  background-color: rgb(255 255 255 / 49%);
+  font-family: MyFont;
+  color: darkmagenta;
+  font-size: 1.6rem;
 }
 
 input {
-  font-size: 1.3rem;
+  font-size: 1rem;
   width: 250px;
   height: 25px;
   box-sizing: border-box;
+  font-family: MyFont;
 }
 span {
   display: flex;
@@ -311,7 +327,6 @@ form > div > button {
   border: 0;
   padding: 15px 50px;
   color: white;
-  left: 67px;
 }
 
 dialog[open] {
@@ -375,7 +390,7 @@ dialog[open]::backdrop {
 
 .disclaimer {
   margin: 1rem auto;
-  max-width: var(--container-size);
+  max-width: var(--spinner-container-size);
   padding: 10px;
   box-shadow: 0 0 8px 8px rgba(74, 74, 74, 0.8);
   background: #ed0c93;
@@ -409,10 +424,15 @@ dialog[open]::backdrop {
   bottom: 0;
   margin: auto;
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-body {
-  height: 100dvh;
+
+.submitSuccess > h1 {
+  text-align: center;
 }
+
 .styling404 {
   font-family: myFont;
   background-image: url(./assets/IMG_0006.jpg);
@@ -453,8 +473,8 @@ body {
 }
 @media only screen and (max-width: 850px) and (orientation: portrait) {
   :root {
-    --container-size: 300px;
-    --diameter: var(--container-size);
+    --spinner-container-size: 300px;
+    --diameter: var(--spinner-container-size);
   }
 
   .board {
@@ -487,8 +507,8 @@ body {
 
 @media only screen and (max-height: 500px) and (orientation: landscape) {
   :root {
-    --container-size: 280px;
-    --diameter: var(--container-size);
+    --spinner-container-size: 280px;
+    --diameter: var(--spinner-container-size);
     height: 100dvh;
   }
 
@@ -507,7 +527,7 @@ body {
     right: -60%;
   }
 
-  .container {
+  .spinner-container {
     margin-top: 5px;
     z-index: -1;
   }
