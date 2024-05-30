@@ -1,6 +1,6 @@
 export default function probability(externalVariables = 1) {
   let startingValue = 720;
-  let Nothings = [144, 216, 324];
+  let Nothings = [288, 216, 108];
   const bonusDonutProbability =
     externalVariables === 1 ? 0.15 : externalVariables[0];
   const bonusTwoDonutsProbability =
@@ -19,10 +19,10 @@ export default function probability(externalVariables = 1) {
     spin = 36 + margin;
     result = "2 Donuts";
   } else if (spin < bonusDonutProbability) {
-    spin = 72 + margin + whichSlice;
+    spin = 144 + margin + whichSlice;
     result = "Donut";
   } else if (spin < HugProbability) {
-    spin = 108 + margin + whichSlice;
+    spin = 72 + margin + whichSlice;
     result = "A Hug";
   } else if (spin < spinAgainProbability) {
     spin = 180 + margin + whichSlice;
