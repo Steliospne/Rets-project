@@ -389,6 +389,10 @@ dialog[open]::backdrop {
   backdrop-filter: blur(4px);
 }
 
+dialog p {
+  white-space:pre-line;
+}
+
 .disclaimer {
   margin: 1rem auto;
   max-width: var(--spinner-container-size);

@@ -104,10 +104,10 @@ export default class Spinner {
       document.querySelector("dialog").value = "end";
 
       if (Spinner.result === "Nothing") {
-        dialogMessage.textContent = `Better luck next time!`;
+        dialogMessage.innerHTML = `Better luck next time!\nThank you for playing!`;
         Spinner.postResult();
       } else {
-        dialogMessage.textContent = `Congratulations! You got ${Spinner.result.toLowerCase()}!`;
+        dialogMessage.innerHTML = `Congratulations! You got ${Spinner.result.toLowerCase()}!\nThank you for playing!`;
         Spinner.postResult();
       }
       document.querySelector("dialog").showModal();
