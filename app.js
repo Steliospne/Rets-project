@@ -2,6 +2,7 @@ const fs = require("fs");
 const express = require("express");
 const mongoose = require("mongoose");
 const Visitor = require("./models/visitor.js");
+const Spin_result = require("./models/spin_result.js");
 const { error } = require("console");
 
 const app = express();
@@ -17,7 +18,7 @@ const dbURI =
 mongoose
   .connect(dbURI)
   .then((result) => {
-    const message = "Connected to db@" + result.connections[0].host + "\n"
+    const message = "Connected to db@" + result.connections[0].host + "\n";
     logger(message);
     console.log("Connected to db\n");
     app.listen(8080);
@@ -33,6 +34,7 @@ mongoose
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Routing
 app.get("/", (req, res) => {
@@ -47,13 +49,17 @@ app.get("/", (req, res) => {
         // result.visited = true;
         result.save().catch((err) => {
           console.log(err);
+          error_logger(err);
         });
         res.sendFile("./dist/index.html", { root: __dirname });
       } else {
         res.send("Access Denied");
       }
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      error_logger(err);
+      console.log(err);
+    });
 });
 
 app.get("/form", (req, res) => {
@@ -67,15 +73,46 @@ app.get("/form", (req, res) => {
       }
       res.sendFile("./dist/form.html", { root: __dirname });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      console.log(err);
+      error_logger(err);
+    });
 });
 
 app.get("/submit-ok", (req, res) => {
   res.sendFile("./dist/submit.html", { root: __dirname });
 });
 
+app.post("/", (req, res) => {
+  const visitorURL = new URL(req.url, baseURLdev);
+  const visitorCode = visitorURL.search.slice(1);
+  const spin_result = new Spin_result();
+  console.log(req.body);
+  spin_result.result = req.body.result;
+  spin_result.code = req.body.code;
+
+  spin_result
+    .save()
+    .then(() => console.log("result sent OK"))
+    .catch((err) => console.log(err));
+
+  // Visitor.findOne({ code: visitorCode }).then((result) => {
+  //   result.name = req.body.name;
+  //   result.email = req.body.email;
+  //   result.phone = req.body.phone;
+  //   result
+  //     .save()
+  //     .then((result) => {
+  //       res.redirect("/submit-ok");
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       error_logger(err);
+  //     });
+  // });
+});
+
 app.post("/submit", (req, res) => {
-  console.log(req.url, req.body);
   const visitorURL = new URL(req.url, baseURLdev);
   const visitorCode = visitorURL.search.slice(1);
   Visitor.findOne({ code: visitorCode }).then((result) => {
@@ -89,6 +126,7 @@ app.post("/submit", (req, res) => {
       })
       .catch((err) => {
         console.log(err);
+        error_logger(err);
       });
   });
 });
@@ -106,7 +144,7 @@ app.use((req, res) => {
 });
 
 const error_logger = function (err) {
-  let timestamp = new Date().toISOString()
+  let timestamp = new Date().toISOString();
   const filename = "logs/error_logs.txt";
   const err_data = `
 ${timestamp}
@@ -123,7 +161,7 @@ const logger = function (msg) {
   const data = `
 ${timestamp}
 ${msg}\n
-  `
+  `;
   fs.appendFile(filename, data, (err) => {
     if (err) throw err;
   });
