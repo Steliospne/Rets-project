@@ -87,6 +87,7 @@ export default class Spinner {
 
     dynamicStyles.sheet.insertRule(body, dynamicStyles.length);
   }
+
   static showMessage() {
     const spinButton = document.querySelector("#spin");
     const dial = document.querySelector(".dial");
@@ -101,13 +102,38 @@ export default class Spinner {
     } else {
       // sets value to end to know that the spins are over
       document.querySelector("dialog").value = "end";
+
       if (Spinner.result === "Nothing") {
         dialogMessage.textContent = `Unfortunate, better luck next time!`;
+        Spinner.postResult();
       } else {
         dialogMessage.textContent = `Congrats! You got ${Spinner.result}!`;
+        Spinner.postResult();
       }
       document.querySelector("dialog").showModal();
       spinButton.style.pointerEvents = "none";
     }
+  }
+
+  static postResult() {
+    const URL = window.location.href.slice(
+      0,
+      window.location.href.indexOf("?")
+    );
+
+    const code = window.location.href.slice(
+      window.location.href.indexOf("?") + 1
+    );
+
+    fetch(URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=UTF-8",
+      },
+      body: JSON.stringify({
+        result: Spinner.result,
+        code: code,
+      }),
+    });
   }
 }
