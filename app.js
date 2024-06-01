@@ -18,7 +18,7 @@ const dbURI =
 mongoose
   .connect(dbURI)
   .then((result) => {
-    const message = "Connected to db@" + result.connections[0].host + "\n";
+    const message = "Connected to db@" + result.connections[0].host;
     logger(message);
     console.log("Connected to db\n");
     app.listen(8080);
@@ -148,8 +148,7 @@ const error_logger = function (err) {
   const filename = "logs/error_logs.txt";
   const err_data = `
 ${timestamp}
-${err.stack}\n
-  `;
+${err.stack}\n`;
   fs.appendFile(filename, err_data, (err) => {
     if (err) throw err;
   });
@@ -160,8 +159,7 @@ const logger = function (msg) {
   const filename = "./logs/info_logs.txt";
   const data = `
 ${timestamp}
-${msg}\n
-  `;
+${msg}\n`;
   fs.appendFile(filename, data, (err) => {
     if (err) throw err;
   });
